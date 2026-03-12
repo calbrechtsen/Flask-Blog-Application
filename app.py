@@ -38,7 +38,11 @@ class Comment(db.Model):
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+
+    posts = Post.query.order_by(Post.created_at.desc()).all()
+
+
+    return render_template("index.html", posts=posts)
 
 @app.route("/post/new", methods=["GET", "POST"])
 def new_post():
