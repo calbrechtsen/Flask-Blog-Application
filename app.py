@@ -62,5 +62,10 @@ def new_post():
 
     return render_template("new_post.html")
 
+@app.route("/post/<int:post_id>")
+def post_detail(post_id):
+    post = Post.query.get_or_404(post_id)
+    return render_template("post_detail.html", post=post)
+
 if __name__ == "__main__":
     app.run(debug=True)
