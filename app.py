@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime, timezone
@@ -6,7 +6,8 @@ import os
 
 app = Flask(__name__)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///blog.db'
+app.config["SECRET_KEY"] = "dev-secret-key"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///blog.db"
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -41,6 +42,20 @@ def home():
 
 @app.route("/post/new", methods=["GET", "POST"])
 def new_post():
+    if request.method == "POST":
+        title = request.form.get("title", "").strip()
+        body = request.form.get("body", "").strip()
+
+        if not title or not body:
+            flash("title and body are required")
+            return redirect(url_for("new_post"))
+        
+        post = Post(title=title, body=body)
+        db.session.add(post)
+        db.session.commit()
+        flash("Post Created")
+        return redirect(url_for("home"))
+
     return render_template("new_post.html")
 
 if __name__ == "__main__":
