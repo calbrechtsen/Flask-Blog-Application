@@ -2,30 +2,33 @@
 
 {% block content %}
 
-<h1>All Blog Posts</h1>
+<h1 class="page-title">All Blog Posts</h1>
 
 {% if posts %}
 {% for post in posts %}
-<div class="post">
-    <h2>
-        <a href="/post/{{ post.id }}">
+
+<article class="post-card">
+
+    <h2 class="post-title">
+        <a href="{{ url_for('post_detail', post_id=post.id) }}">
             {{ post.title }}
         </a>
     </h2>
 
-    <small>
+    <small class="post-meta">
         {{ post.created_at.strftime("%Y-%m-%d %H:%M") }}
     </small>
 
-    <p>
+    <p class="post-preview">
         {{ post.body[:200] }}...
     </p>
 
-    <a href="/post/{{ post.id }}">
-        <button>Read more</button>
+    <a href="{{ url_for('post_detail', post_id=post.id) }}" class="read-more">
+        Read more →
     </a>
 
-</div>
+</article>
+
 {% endfor %}
 {% else %}
 <p>No posts yet.</p>

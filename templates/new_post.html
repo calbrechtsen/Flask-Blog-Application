@@ -2,19 +2,15 @@
 
 {% block content %}
 
-<h1>Create New Post</h1>
+<h1 class="page-title">Create New Post</h1>
 
-<form method="POST">
+<form class="post-form" method="POST">
 
-    <label>Title</label><br>
+    <label>Title</label>
     <input type="text" name="title" placeholder="Post title" required>
 
-    <br>
-
-    <label>Body</label><br>
+    <label>Body</label>
     <textarea name="body" placeholder="Write your post..." required></textarea>
-
-    <br>
 
     <button type="submit">Create Post</button>
 

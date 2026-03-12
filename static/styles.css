@@ -1,141 +1,174 @@
-/* Import a Google font for a modern look */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
-/* General body styling with background image */
-body {
-    font-family: 'Roboto', sans-serif;
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background: url('https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
-    background-size: cover;
-    color: #292626;
 }
 
-h1 {
-    color: hsl(0, 0%, 100%);
-    font-size: 2.5rem;
-    margin-bottom: 25px;
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f4f6f8;
+    color: #333;
+    line-height: 1.6;
 }
 
-/* Overlay for readability */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: -1;
-}
+/* Layout */
 
-/* Container for content */
 .container {
-    max-width: 900px;
+    max-width: 850px;
     margin: auto;
-    padding: 30px 15px;
+    padding: 40px 20px;
 }
 
-/* Navigation bar */
-nav {
-    margin-bottom: 30px;
+/* Navbar */
+
+.navbar {
     display: flex;
-    justify-content: center;
-    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: white;
+    border-bottom: 1px solid #eee;
 }
 
-nav a {
+.logo {
+    font-weight: 700;
+    font-size: 1.3rem;
     text-decoration: none;
-    font-weight: bold;
-    color: #fff;
-    font-size: 1.1rem;
-    transition: color 0.3s, transform 0.3s;
+    color: #333;
 }
 
-nav a:hover {
-    color: #e74c3c;
-    transform: scale(1.05);
+.nav-right a {
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    color: #555;
+    transition: color 0.2s;
+}
+
+.nav-right a:hover {
+    color: #0077ff;
+}
+
+/* Page titles */
+
+.page-title {
+    margin-bottom: 30px;
+    font-size: 2rem;
+    font-weight: 600;
 }
 
 /* Post cards */
-.post {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
+
+.post-card {
+    background: white;
+    padding: 25px;
     border-radius: 10px;
-    backdrop-filter: blur(5px);
-    transition: transform 0.3s, box-shadow 0.3s;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.15s ease;
 }
 
-.post:hover {
+.post-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* Post title links */
-.post h2 a {
-    color: #070303;
+.post-title a {
     text-decoration: none;
-    transition: color 0.3s;
+    color: #222;
 }
 
-.post h2 a:hover {
-    color: #e74c3c;
+.post-title a:hover {
+    color: #0077ff;
 }
 
-/* Timestamps and small text */
-small {
-    color: #6d6363;
+.post-meta {
+    display: block;
+    margin: 10px 0;
+    color: #777;
+    font-size: 0.9rem;
 }
 
-/* Form styling */
-form {
+.post-preview {
+    margin: 15px 0;
+}
+
+.read-more {
+    text-decoration: none;
+    font-weight: 600;
+    color: #0077ff;
+}
+
+/* Full post */
+
+.post-full {
+    background: white;
+    padding: 35px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 40px;
+}
+
+.post-body {
+    margin-top: 20px;
+    white-space: pre-line;
+}
+
+/* Comments */
+
+.comments {
+    margin-top: 40px;
+}
+
+.comment {
+    background: white;
+    padding: 18px;
+    border-radius: 8px;
+    margin-top: 15px;
+    border-left: 4px solid #0077ff;
+}
+
+.comment small {
+    color: #777;
+    margin-left: 10px;
+}
+
+/* Forms */
+
+.post-form,
+.comment-form form {
     margin-top: 20px;
 }
 
-input[type="text"],
+input,
 textarea {
     width: 100%;
     padding: 12px;
+    margin-top: 10px;
     margin-bottom: 15px;
-    border: none;
     border-radius: 6px;
-    font-size: 1rem;
-    background: rgba(255, 255, 255, 0.9);
-    color: #333;
-    box-sizing: border-box;
+    border: 1px solid #ddd;
+    font-family: inherit;
+    font-size: 0.95rem;
 }
 
 textarea {
+    min-height: 140px;
     resize: vertical;
 }
 
 button {
-    padding: 12px 25px;
-    background-color: #e74c3c;
-    color: white;
+    padding: 12px 22px;
     border: none;
+    background: #0077ff;
+    color: white;
     border-radius: 6px;
-    font-size: 1rem;
+    font-size: 0.95rem;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background 0.2s;
 }
 
 button:hover {
-    background-color: #c0392b;
-    transform: scale(1.05);
-}
-
-/* Horizontal line styling */
-hr {
-    border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
-    margin: 25px 0;
-}
-
-/* Comments section */
-.post.comments {
-    background-color: rgba(255, 255, 255, 0.2);
-    margin-left: 20px;
-    padding: 15px;
+    background: #005edb;
 }

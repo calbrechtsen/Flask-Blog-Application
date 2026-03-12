@@ -2,54 +2,60 @@
 
 {% block content %}
 
-<h1>{{ post.title }}</h1>
+<article class="post-full">
 
-<p>
-    <small>
+    <h1 class="post-title">{{ post.title }}</h1>
+
+    <p class="post-meta">
         Posted on {{ post.created_at.strftime("%Y-%m-%d %H:%M") }}
-    </small>
-</p>
+    </p>
 
-<hr>
+    <div class="post-body">
+        {{ post.body }}
+    </div>
 
-<p>
-    {{ post.body }}
-</p>
+</article>
 
-<hr>
+<section class="comments">
 
-<h2>Comments</h2>
+    <h2>Comments</h2>
 
-{% for comment in post.comments %}
-<div class="post">
-    <strong>{{ comment.author }}</strong>
+    {% for comment in post.comments %}
 
-    <small>
-        {{ comment.created_at.strftime("%Y-%m-%d %H:%M") }}
-    </small>
+    <div class="comment">
 
-    <p>{{ comment.body }}</p>
-</div>
-{% else %}
-<p>No comments yet.</p>
-{% endfor %}
+        <strong>{{ comment.author }}</strong>
 
-<hr>
+        <small>
+            {{ comment.created_at.strftime("%Y-%m-%d %H:%M") }}
+        </small>
 
-<h3>Add Comment</h3>
+        <p>{{ comment.body }}</p>
 
-<form method="POST">
+    </div>
 
-    <input type="text" name="author" placeholder="Your name" required>
+    {% else %}
 
-    <br>
+    <p>No comments yet.</p>
 
-    <textarea name="body" placeholder="Write a comment..." required></textarea>
+    {% endfor %}
 
-    <br>
+</section>
 
-    <button type="submit">Post Comment</button>
+<section class="comment-form">
 
-</form>
+    <h3>Add Comment</h3>
+
+    <form method="POST">
+
+        <input type="text" name="author" placeholder="Your name" required>
+
+        <textarea name="body" placeholder="Write a comment..." required></textarea>
+
+        <button type="submit">Post Comment</button>
+
+    </form>
+
+</section>
 
 {% endblock %}
