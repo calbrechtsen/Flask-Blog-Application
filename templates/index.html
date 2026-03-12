@@ -20,6 +20,11 @@
     <p>
         {{ post.body[:200] }}...
     </p>
+
+    <a href="/post/{{ post.id }}">
+        <button>Read more</button>
+    </a>
+
 </div>
 {% endfor %}
 {% else %}
