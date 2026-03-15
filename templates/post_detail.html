@@ -14,13 +14,21 @@
         {{ post.body }}
     </div>
 
+    <form method="POST" action="{{ url_for('delete_post', post_id=post.id) }}">
+        <button onclick="return confirm('Delete this post?')">
+            Delete Post
+        </button>
+    </form>
+
 </article>
+
+<hr>
 
 <section class="comments">
 
     <h2>Comments</h2>
 
-    {% for comment in post.comments %}
+    {% for comment in comments %}
 
     <div class="comment">
 
@@ -32,7 +40,17 @@
 
         <p>{{ comment.body }}</p>
 
+        <form method="POST" action="{{ url_for('delete_comment', comment_id=comment.id) }}">
+
+            <button onclick="return confirm('Delete this comment?')">
+                Delete Comment
+            </button>
+
+        </form>
+
     </div>
+
+    <hr>
 
     {% else %}
 
@@ -46,13 +64,15 @@
 
     <h3>Add Comment</h3>
 
-    <form method="POST">
+    <form method="POST" action="{{ url_for('create_comment', post_id=post.id) }}">
 
         <input type="text" name="author" placeholder="Your name" required>
 
         <textarea name="body" placeholder="Write a comment..." required></textarea>
 
-        <button type="submit">Post Comment</button>
+        <button type="submit">
+            Post Comment
+        </button>
 
     </form>
 

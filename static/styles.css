@@ -172,3 +172,11 @@ button {
 button:hover {
     background: #005edb;
 }
+
+.comment button {
+    background: #c0392b;
+}
+
+.comment button:hover {
+    background: #922b21;
+}
