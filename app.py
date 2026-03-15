@@ -65,7 +65,55 @@ def new_post():
 @app.route("/post/<int:post_id>")
 def post_detail(post_id):
     post = Post.query.get_or_404(post_id)
-    return render_template("post_detail.html", post=post)
+    comments = post.comments.order_by(Comment.created_at.desc()).all()
+    return render_template("post_detail.html", post=post, comments=comments)
+
+@app.route("/post/<int:post_id>/comment", methods=["POST"])
+def create_comment(post_id):
+    post = Post.query.get_or_404(post_id)
+
+    author = request.form.get("author", "").strip()
+    body = request.form.get("body", "").strip()
+
+    if not author or not body:
+        flash("Name and comment are required")
+        return redirect(url_for("post_detail", post_id=post_id))
+
+    comment = Comment(author=author, body=body, post=post)
+
+    db.session.add(comment)
+    db.session.commit()
+
+    flash("Comment added")
+
+    return redirect(url_for("post_detail", post_id=post_id))
+
+#Route to delete a comment
+
+@app.route("/comment/<int:comment_id>/delete", methods=["POST"])
+def delete_comment(comment_id):
+    comment = Comment.query.get_or_404(comment_id)
+    post_id = comment.post_id
+
+    db.session.delete(comment)
+    db.session.commit()
+
+    flash("Comment deleted")
+
+    return redirect(url_for("post_detail", post_id=post_id))
+
+#Route to delete a Post
+
+@app.route("/post/<int:post_id>/delete", methods=["POST"])
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)
+
+    db.session.delete(post)
+    db.session.commit()
+
+    flash("Post deleted")
+
+    return redirect(url_for("home"))
 
 if __name__ == "__main__":
     app.run(debug=True)
